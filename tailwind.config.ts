@@ -86,6 +86,11 @@ export default {
 				'scale-in': {
 					'0%': { opacity: '0', transform: 'scale(0.95)' },
 					'100%': { opacity: '1', transform: 'scale(1)' }
+				},
+				'rocket-fly': {
+					'0%': { transform: 'translate(0, 0) rotate(-45deg)', opacity: '1' },
+					'90%': { opacity: '1' },
+					'100%': { transform: 'translate(120vw, -120vh) rotate(-45deg) scale(0.2)', opacity: '0' }
 				}
 			},
 			animation: {
@@ -93,7 +98,8 @@ export default {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in': 'fade-in 0.5s ease-out forwards',
 				'fade-up': 'fade-up 0.5s ease-out forwards',
-				'scale-in': 'scale-in 0.4s ease-out forwards'
+				'scale-in': 'scale-in 0.4s ease-out forwards',
+				'rocket': 'rocket-fly 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards'
 			},
 			fontFamily: {
 				sans: ['-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'sans-serif'],

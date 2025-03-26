@@ -134,3 +134,44 @@
   opacity: 0;
   transition: opacity 300ms;
 }
+
+/* Rocket animation */
+.rocket-wrapper {
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  transform-origin: center;
+}
+
+.rocket-trail {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  width: 8px;
+  height: 100px;
+  background: linear-gradient(to bottom, rgba(0, 113, 227, 0.7), rgba(0, 113, 227, 0));
+  transform: translateX(-50%) rotate(45deg);
+  transform-origin: top;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(4px);
+}
+
+@keyframes rocket-fly {
+  0% {
+    transform: translate(0, 0) rotate(-45deg) scale(1);
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(120vw, -120vh) rotate(-45deg) scale(0.2);
+    opacity: 0;
+  }
+}
+
+.animate-rocket {
+  animation: rocket-fly 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+}
+

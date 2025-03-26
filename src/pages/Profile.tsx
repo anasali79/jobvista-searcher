@@ -1,12 +1,92 @@
 
 import React from "react";
 import Document from "./_document";
-import { useApplicationStore } from "../utils/applicationStore";
+import { useApplicationStore, ApplicationStatus } from "../utils/applicationStore";
 import { Link } from "react-router-dom";
 
-const Profile = () => {
-  const { appliedJobs } = useApplicationStore();
+// Custom status badge component
+const StatusBadge = ({ status }: { status: ApplicationStatus }) => {
+  const statusStyles: Record<ApplicationStatus, { bg: string; text: string }> = {
+    applied: { bg: "bg-blue-100", text: "text-blue-800" },
+    screening: { bg: "bg-purple-100", text: "text-purple-800" },
+    interview: { bg: "bg-yellow-100", text: "text-yellow-800" },
+    assessment: { bg: "bg-indigo-100", text: "text-indigo-800" },
+    offer: { bg: "bg-green-100", text: "text-green-800" },
+    rejected: { bg: "bg-red-100", text: "text-red-800" }
+  };
 
+  const statusLabels: Record<ApplicationStatus, string> = {
+    applied: "Applied",
+    screening: "Screening",
+    interview: "Interview",
+    assessment: "Assessment",
+    offer: "Offer",
+    rejected: "Rejected"
+  };
+
+  const style = statusStyles[status];
+  
+  return (
+    <span className={`inline-block px-2 py-1 text-xs ${style.bg} ${style.text} rounded`}>
+      {statusLabels[status]}
+    </span>
+  );
+};
+
+const ApplicationTimeline = ({ status }: { status: ApplicationStatus }) => {
+  const statuses: ApplicationStatus[] = ['applied', 'screening', 'interview', 'assessment', 'offer'];
+  const currentIndex = statuses.indexOf(status);
+  
+  // Handle rejected status separately
+  if (status === 'rejected') {
+    return (
+      <div className="mt-3 relative">
+        <div className="h-1 w-full bg-gray-200 rounded">
+          <div className="h-1 bg-red-400 rounded" style={{ width: '100%' }}></div>
+        </div>
+        <div className="flex justify-between mt-1 text-xs text-apple-lighttext">
+          <span>Applied</span>
+          <span className="text-red-500 font-medium">Rejected</span>
+        </div>
+      </div>
+    );
+  }
+  
+  // Calculate progress percentage
+  const progressPercentage = currentIndex >= 0 ? (currentIndex / (statuses.length - 1)) * 100 : 0;
+  
+  return (
+    <div className="mt-3 relative">
+      <div className="h-1 w-full bg-gray-200 rounded">
+        <div 
+          className="h-1 bg-apple-blue rounded transition-all duration-500" 
+          style={{ width: `${progressPercentage}%` }}
+        ></div>
+      </div>
+      <div className="flex justify-between mt-1 text-xs text-apple-lighttext">
+        <span>Applied</span>
+        <span>Screening</span>
+        <span>Interview</span>
+        <span>Assessment</span>
+        <span>Offer</span>
+      </div>
+    </div>
+  );
+};
+
+const Profile = () => {
+  const { applications, updateApplicationStatus } = useApplicationStore();
+  
+  // Function to simulate changing application status (for demo purposes)
+  const handleAdvanceStatus = (jobId: string, currentStatus: ApplicationStatus) => {
+    const statusOrder: ApplicationStatus[] = ['applied', 'screening', 'interview', 'assessment', 'offer'];
+    const currentIndex = statusOrder.indexOf(currentStatus);
+    
+    if (currentIndex < statusOrder.length - 1) {
+      updateApplicationStatus(jobId, statusOrder[currentIndex + 1]);
+    }
+  };
+  
   return (
     <Document>
       <div className="max-w-5xl mx-auto py-12">
@@ -52,17 +132,48 @@ const Profile = () => {
           <div className="md:col-span-2">
             <div className="glass-card p-6 mb-6">
               <h3 className="text-xl font-semibold text-apple-text mb-4">Your Applications</h3>
-              <div className="space-y-4">
-                {appliedJobs.length > 0 ? (
-                  appliedJobs.map((job) => (
-                    <div key={job.id} className="border-b border-gray-200 pb-4 last:border-b-0">
-                      <h4 className="font-medium text-apple-text">{job.title}</h4>
-                      <p className="text-sm text-apple-lighttext">{job.company} • {job.location}</p>
-                      <div className="flex mt-2 gap-2">
-                        <span className="inline-block px-2 py-1 text-xs bg-green-100 text-green-800 rounded">Applied</span>
-                        <Link to={`/job/${job.id}`} className="inline-block px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded hover:bg-blue-200">
+              <div className="space-y-6">
+                {applications.length > 0 ? (
+                  applications.map((application) => (
+                    <div key={application.job.id} className="border-b border-gray-200 pb-6 last:border-b-0">
+                      <div className="flex justify-between items-start">
+                        <div>
+                          <h4 className="font-medium text-apple-text">{application.job.title}</h4>
+                          <p className="text-sm text-apple-lighttext">{application.job.company} • {application.job.location}</p>
+                          <p className="text-xs text-apple-lighttext mt-1">
+                            Applied on {new Date(application.appliedAt).toLocaleDateString()}
+                          </p>
+                        </div>
+                        <StatusBadge status={application.status} />
+                      </div>
+                      
+                      <ApplicationTimeline status={application.status} />
+                      
+                      <div className="flex mt-4 gap-2">
+                        <Link to={`/job/${application.job.id}`} className="inline-block px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded hover:bg-blue-200">
                           View Job
                         </Link>
+                        {/* Demo buttons - in a real app, these would be driven by employer actions */}
+                        {application.status !== 'offer' && application.status !== 'rejected' && (
+                          <button 
+                            onClick={() => handleAdvanceStatus(application.job.id, application.status)}
+                            className="inline-block px-2 py-1 text-xs bg-green-100 text-green-800 rounded hover:bg-green-200"
+                          >
+                            Advance Status (Demo)
+                          </button>
+                        )}
+                        {application.status !== 'rejected' && (
+                          <button 
+                            onClick={() => updateApplicationStatus(application.job.id, 'rejected')}
+                            className="inline-block px-2 py-1 text-xs bg-red-100 text-red-800 rounded hover:bg-red-200"
+                          >
+                            Set Rejected (Demo)
+                          </button>
+                        )}
+                      </div>
+                      
+                      <div className="mt-3 text-xs text-apple-lighttext">
+                        <p>Last updated: {new Date(application.lastUpdated).toLocaleString()}</p>
                       </div>
                     </div>
                   ))
