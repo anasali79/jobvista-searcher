@@ -1,5 +1,5 @@
 
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 import { Link } from "react-router-dom";
 
 interface LayoutProps {
@@ -7,6 +7,12 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <header className="sticky top-0 bg-white/80 backdrop-blur-md z-10 border-b border-gray-100 shadow-sm">
@@ -37,17 +43,22 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Link to="/" className="text-apple-text hover:text-apple-blue transition-colors duration-300">
                   Browse Jobs
                 </Link>
-                <a href="#" className="text-apple-text hover:text-apple-blue transition-colors duration-300">
+                <Link to="/employers" className="text-apple-text hover:text-apple-blue transition-colors duration-300">
                   For Employers
-                </a>
-                <a href="#" className="text-apple-text hover:text-apple-blue transition-colors duration-300">
+                </Link>
+                <Link to="/resources" className="text-apple-text hover:text-apple-blue transition-colors duration-300">
                   Resources
-                </a>
+                </Link>
               </div>
             </nav>
             <div className="flex items-center space-x-4">
-              <button className="hidden md:block apple-button">Post a Job</button>
-              <button className="md:hidden p-2 rounded-md bg-apple-gray">
+              <Link to="/post-job" className="hidden md:block apple-button">Post a Job</Link>
+              <button 
+                className="md:hidden p-2 rounded-md bg-apple-gray"
+                onClick={toggleMobileMenu} 
+                aria-expanded={mobileMenuOpen}
+                aria-label="Toggle menu"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -68,6 +79,42 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
           </div>
         </div>
+        
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-white border-b border-gray-100 shadow-sm">
+            <div className="px-4 py-3 space-y-2">
+              <Link 
+                to="/" 
+                className="block py-2 px-3 text-apple-text hover:bg-apple-gray rounded-md"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Browse Jobs
+              </Link>
+              <Link 
+                to="/employers" 
+                className="block py-2 px-3 text-apple-text hover:bg-apple-gray rounded-md"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                For Employers
+              </Link>
+              <Link 
+                to="/resources" 
+                className="block py-2 px-3 text-apple-text hover:bg-apple-gray rounded-md"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Resources
+              </Link>
+              <Link 
+                to="/post-job" 
+                className="block py-2 px-3 bg-apple-blue text-white rounded-md"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Post a Job
+              </Link>
+            </div>
+          </div>
+        )}
       </header>
       <main className="page-container">{children}</main>
       <footer className="py-12 bg-apple-gray">
@@ -76,7 +123,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div>
               <h3 className="text-sm font-semibold text-apple-text mb-4">For Job Seekers</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Browse Jobs</a></li>
+                <li><Link to="/" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Browse Jobs</Link></li>
                 <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Job Alerts</a></li>
                 <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">My Profile</a></li>
               </ul>
@@ -84,9 +131,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div>
               <h3 className="text-sm font-semibold text-apple-text mb-4">For Employers</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Post a Job</a></li>
-                <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Search Resumes</a></li>
-                <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Employer Resources</a></li>
+                <li><Link to="/post-job" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Post a Job</Link></li>
+                <li><Link to="/employers" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Search Resumes</Link></li>
+                <li><Link to="/employers" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Employer Resources</Link></li>
               </ul>
             </div>
             <div>
@@ -100,7 +147,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div>
               <h3 className="text-sm font-semibold text-apple-text mb-4">Support</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Help Center</a></li>
+                <li><Link to="/resources" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Help Center</Link></li>
                 <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Privacy Policy</a></li>
                 <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Terms of Service</a></li>
               </ul>
