@@ -2,6 +2,8 @@
 import React, { useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Job } from "../data/jobs";
+import { useApplicationStore } from "../utils/applicationStore";
+import { toast } from "@/hooks/use-toast";
 
 interface JobDetailProps {
   job: Job | undefined;
@@ -9,6 +11,7 @@ interface JobDetailProps {
 
 const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
   const navigate = useNavigate();
+  const { applyForJob, hasAppliedForJob } = useApplicationStore();
   
   if (!job) {
     return (
@@ -21,6 +24,16 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
       </div>
     );
   }
+
+  const hasApplied = hasAppliedForJob(job.id);
+
+  const handleApply = () => {
+    applyForJob(job);
+    toast({
+      title: "Application Submitted",
+      description: `You've successfully applied to ${job.title} at ${job.company}.`,
+    });
+  };
 
   return (
     <div className="animate-fade-in max-w-4xl mx-auto">
@@ -84,8 +97,12 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
               </div>
             </div>
           </div>
-          <button className="apple-button">
-            Apply Now
+          <button 
+            className={`apple-button ${hasApplied ? 'bg-green-500 hover:bg-green-600' : ''}`}
+            onClick={handleApply}
+            disabled={hasApplied}
+          >
+            {hasApplied ? 'Applied' : 'Apply Now'}
           </button>
         </div>
         
@@ -202,8 +219,12 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
           <h3 className="text-lg font-semibold text-apple-text">Interested in this job?</h3>
           <p className="text-apple-lighttext">Apply now and we'll help you get in touch with {job.company}</p>
         </div>
-        <button className="apple-button mt-4 md:mt-0">
-          Apply for this Position
+        <button 
+          className={`apple-button mt-4 md:mt-0 ${hasApplied ? 'bg-green-500 hover:bg-green-600' : ''}`}
+          onClick={handleApply}
+          disabled={hasApplied}
+        >
+          {hasApplied ? 'Already Applied' : 'Apply for this Position'}
         </button>
       </div>
     </div>

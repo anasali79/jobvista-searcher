@@ -1,8 +1,12 @@
 
 import React from "react";
 import Document from "./_document";
+import { useApplicationStore } from "../utils/applicationStore";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
+  const { appliedJobs } = useApplicationStore();
+
   return (
     <Document>
       <div className="max-w-5xl mx-auto py-12">
@@ -49,21 +53,25 @@ const Profile = () => {
             <div className="glass-card p-6 mb-6">
               <h3 className="text-xl font-semibold text-apple-text mb-4">Your Applications</h3>
               <div className="space-y-4">
-                <div className="border-b border-gray-200 pb-4">
-                  <h4 className="font-medium text-apple-text">Senior Frontend Developer</h4>
-                  <p className="text-sm text-apple-lighttext">Apple Inc. • Applied 2 days ago</p>
-                  <span className="inline-block px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded mt-2">In Review</span>
-                </div>
-                <div className="border-b border-gray-200 pb-4">
-                  <h4 className="font-medium text-apple-text">UX Designer</h4>
-                  <p className="text-sm text-apple-lighttext">Google • Applied 1 week ago</p>
-                  <span className="inline-block px-2 py-1 text-xs bg-green-100 text-green-800 rounded mt-2">Interview Scheduled</span>
-                </div>
-                <div>
-                  <h4 className="font-medium text-apple-text">Product Manager</h4>
-                  <p className="text-sm text-apple-lighttext">Microsoft • Applied 2 weeks ago</p>
-                  <span className="inline-block px-2 py-1 text-xs bg-gray-100 text-gray-800 rounded mt-2">Closed</span>
-                </div>
+                {appliedJobs.length > 0 ? (
+                  appliedJobs.map((job) => (
+                    <div key={job.id} className="border-b border-gray-200 pb-4 last:border-b-0">
+                      <h4 className="font-medium text-apple-text">{job.title}</h4>
+                      <p className="text-sm text-apple-lighttext">{job.company} • {job.location}</p>
+                      <div className="flex mt-2 gap-2">
+                        <span className="inline-block px-2 py-1 text-xs bg-green-100 text-green-800 rounded">Applied</span>
+                        <Link to={`/job/${job.id}`} className="inline-block px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded hover:bg-blue-200">
+                          View Job
+                        </Link>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center py-8">
+                    <p className="text-apple-lighttext mb-3">You haven't applied to any jobs yet.</p>
+                    <Link to="/" className="apple-button">Browse Jobs</Link>
+                  </div>
+                )}
               </div>
             </div>
             
