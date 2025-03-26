@@ -1,6 +1,6 @@
 
 import React, { useState } from "react";
-import Layout from "../components/Layout";
+import Document from "./_document";
 import SearchBar from "../components/SearchBar";
 import JobCard from "../components/JobCard";
 import { jobs, filterJobs } from "../data/jobs";
@@ -15,7 +15,7 @@ const Index = () => {
   };
 
   return (
-    <Layout>
+    <Document>
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-12 animate-fade-in">
           <span className="inline-block px-3 py-1 text-sm font-medium bg-apple-blue bg-opacity-10 text-apple-blue rounded-full mb-4">
@@ -77,7 +77,7 @@ const Index = () => {
           </div>
         )}
       </div>
-    </Layout>
+    </Document>
   );
 };
 

@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import JobDetail from "./pages/JobDetail";
 import NotFound from "./pages/NotFound";
 
+// Create a Next.js-like structure with React Router
 const queryClient = new QueryClient();
 
 const App = () => (

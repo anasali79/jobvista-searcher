@@ -1,7 +1,7 @@
 
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Layout from "../components/Layout";
+import Document from "./_document";
 import JobDetailComponent from "../components/JobDetail";
 import { getJobById } from "../data/jobs";
 
@@ -15,9 +15,9 @@ const JobDetail = () => {
   }, []);
 
   return (
-    <Layout>
+    <Document>
       <JobDetailComponent job={job} />
-    </Layout>
+    </Document>
   );
 };
 

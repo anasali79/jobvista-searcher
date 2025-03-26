@@ -1,7 +1,7 @@
 
 import { useLocation, Link } from "react-router-dom";
 import { useEffect } from "react";
-import Layout from "../components/Layout";
+import Document from "./_document";
 
 const NotFound = () => {
   const location = useLocation();
@@ -14,7 +14,7 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <Layout>
+    <Document>
       <div className="min-h-[60vh] flex flex-col items-center justify-center animate-fade-in">
         <div className="glass-card p-12 text-center max-w-md">
           <div className="text-6xl font-semibold text-apple-text mb-4">404</div>
@@ -27,7 +27,7 @@ const NotFound = () => {
           </Link>
         </div>
       </div>
-    </Layout>
+    </Document>
   );
 };
 
