@@ -124,8 +124,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <h3 className="text-sm font-semibold text-apple-text mb-4">For Job Seekers</h3>
               <ul className="space-y-3">
                 <li><Link to="/" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Browse Jobs</Link></li>
-                <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Job Alerts</a></li>
-                <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">My Profile</a></li>
+                <li><Link to="/job-alerts" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Job Alerts</Link></li>
+                <li><Link to="/profile" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">My Profile</Link></li>
               </ul>
             </div>
             <div>
@@ -139,17 +139,17 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <div>
               <h3 className="text-sm font-semibold text-apple-text mb-4">Company</h3>
               <ul className="space-y-3">
-                <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">About Us</a></li>
-                <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Contact</a></li>
-                <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Careers</a></li>
+                <li><Link to="/about" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">About Us</Link></li>
+                <li><Link to="/contact" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Contact</Link></li>
+                <li><Link to="/careers" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Careers</Link></li>
               </ul>
             </div>
             <div>
               <h3 className="text-sm font-semibold text-apple-text mb-4">Support</h3>
               <ul className="space-y-3">
-                <li><Link to="/resources" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Help Center</Link></li>
-                <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Terms of Service</a></li>
+                <li><Link to="/help" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Help Center</Link></li>
+                <li><Link to="/privacy-policy" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/terms" className="text-sm text-apple-lighttext hover:text-apple-blue transition-colors">Terms of Service</Link></li>
               </ul>
             </div>
           </div>
