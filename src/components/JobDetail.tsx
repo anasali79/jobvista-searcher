@@ -16,8 +16,8 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
   if (!job) {
     return (
       <div className="flex flex-col items-center justify-center py-12">
-        <h2 className="text-2xl font-semibold text-apple-text">Job not found</h2>
-        <p className="text-apple-lighttext mt-2">The job you're looking for doesn't exist or has been removed.</p>
+        <h2 className="text-2xl font-semibold text-apple-text dark:text-white">Job not found</h2>
+        <p className="text-apple-lighttext dark:text-gray-300 mt-2">The job you're looking for doesn't exist or has been removed.</p>
         <Link to="/" className="apple-button mt-6">
           Back to Jobs
         </Link>
@@ -39,7 +39,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
     <div className="animate-fade-in max-w-4xl mx-auto">
       <button 
         onClick={() => navigate(-1)} 
-        className="flex items-center text-apple-lighttext hover:text-apple-blue transition-colors mb-8"
+        className="flex items-center text-apple-lighttext dark:text-gray-300 hover:text-apple-blue dark:hover:text-apple-blue transition-colors mb-8"
       >
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
@@ -59,7 +59,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
       <div className="glass-card p-8 mb-8 animate-scale-in">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
           <div className="flex items-center">
-            <div className="h-16 w-16 bg-apple-gray rounded-md overflow-hidden flex items-center justify-center mr-4">
+            <div className="h-16 w-16 bg-apple-gray dark:bg-gray-700 rounded-md overflow-hidden flex items-center justify-center mr-4">
               {job.companyLogo ? (
                 <img 
                   src={job.companyLogo} 
@@ -67,15 +67,15 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
                   className="h-full w-full object-cover"
                 />
               ) : (
-                <span className="text-apple-text font-semibold text-xl">
+                <span className="text-apple-text dark:text-white font-semibold text-xl">
                   {job.company.charAt(0)}
                 </span>
               )}
             </div>
             <div>
-              <h1 className="text-2xl font-semibold text-apple-text">{job.title}</h1>
+              <h1 className="text-2xl font-semibold text-apple-text dark:text-white">{job.title}</h1>
               <div className="flex items-center mt-1">
-                <span className="text-apple-lighttext">{job.company}</span>
+                <span className="text-apple-lighttext dark:text-gray-300">{job.company}</span>
                 {job.verified && (
                   <span className="ml-2 inline-flex items-center">
                     <svg 
@@ -106,11 +106,11 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
           </button>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 pb-6 border-b border-gray-100">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 pb-6 border-b border-gray-100 dark:border-gray-700">
           <div className="flex items-center">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
-              className="h-5 w-5 text-apple-lighttext mr-3" 
+              className="h-5 w-5 text-apple-lighttext dark:text-gray-300 mr-3" 
               viewBox="0 0 24 24" 
               fill="none" 
               stroke="currentColor" 
@@ -122,8 +122,8 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
               <circle cx="12" cy="10" r="3" />
             </svg>
             <div>
-              <div className="text-sm text-apple-lighttext">Location</div>
-              <div className="font-medium text-apple-text">
+              <div className="text-sm text-apple-lighttext dark:text-gray-300">Location</div>
+              <div className="font-medium text-apple-text dark:text-white">
                 {job.location}
                 {job.remote && <span className="ml-1">(Remote)</span>}
               </div>
@@ -132,7 +132,7 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
           <div className="flex items-center">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
-              className="h-5 w-5 text-apple-lighttext mr-3" 
+              className="h-5 w-5 text-apple-lighttext dark:text-gray-300 mr-3" 
               viewBox="0 0 24 24" 
               fill="none" 
               stroke="currentColor" 
@@ -146,14 +146,14 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
               <line x1="3" x2="21" y1="10" y2="10" />
             </svg>
             <div>
-              <div className="text-sm text-apple-lighttext">Job Type</div>
-              <div className="font-medium text-apple-text">{job.type}</div>
+              <div className="text-sm text-apple-lighttext dark:text-gray-300">Job Type</div>
+              <div className="font-medium text-apple-text dark:text-white">{job.type}</div>
             </div>
           </div>
           <div className="flex items-center">
             <svg 
               xmlns="http://www.w3.org/2000/svg" 
-              className="h-5 w-5 text-apple-lighttext mr-3" 
+              className="h-5 w-5 text-apple-lighttext dark:text-gray-300 mr-3" 
               viewBox="0 0 24 24" 
               fill="none" 
               stroke="currentColor" 
@@ -165,24 +165,24 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
               <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
             </svg>
             <div>
-              <div className="text-sm text-apple-lighttext">Salary</div>
-              <div className="font-medium text-apple-text">{job.salary || "Not specified"}</div>
+              <div className="text-sm text-apple-lighttext dark:text-gray-300">Salary</div>
+              <div className="font-medium text-apple-text dark:text-white">{job.salary || "Not specified"}</div>
             </div>
           </div>
         </div>
         
-        <div className="prose prose-apple max-w-none">
+        <div className="prose prose-apple dark:prose-invert max-w-none">
           <div className="mb-6">
-            <h2 className="text-xl font-semibold text-apple-text mb-4">About the Role</h2>
-            <div className="text-apple-text leading-relaxed whitespace-pre-line">
+            <h2 className="text-xl font-semibold text-apple-text dark:text-white mb-4">About the Role</h2>
+            <div className="text-apple-text dark:text-gray-200 leading-relaxed whitespace-pre-line">
               {job.description}
             </div>
           </div>
           
           {job.responsibilities && (
             <div className="mb-6">
-              <h2 className="text-xl font-semibold text-apple-text mb-4">Responsibilities</h2>
-              <ul className="list-disc pl-5 space-y-2 text-apple-text">
+              <h2 className="text-xl font-semibold text-apple-text dark:text-white mb-4">Responsibilities</h2>
+              <ul className="list-disc pl-5 space-y-2 text-apple-text dark:text-gray-200">
                 {job.responsibilities.map((item, i) => (
                   <li key={i} className="leading-relaxed">{item}</li>
                 ))}
@@ -192,8 +192,8 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
           
           {job.requirements && (
             <div className="mb-6">
-              <h2 className="text-xl font-semibold text-apple-text mb-4">Requirements</h2>
-              <ul className="list-disc pl-5 space-y-2 text-apple-text">
+              <h2 className="text-xl font-semibold text-apple-text dark:text-white mb-4">Requirements</h2>
+              <ul className="list-disc pl-5 space-y-2 text-apple-text dark:text-gray-200">
                 {job.requirements.map((item, i) => (
                   <li key={i} className="leading-relaxed">{item}</li>
                 ))}
@@ -203,8 +203,8 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
           
           {job.benefits && (
             <div className="mb-6">
-              <h2 className="text-xl font-semibold text-apple-text mb-4">Benefits</h2>
-              <ul className="list-disc pl-5 space-y-2 text-apple-text">
+              <h2 className="text-xl font-semibold text-apple-text dark:text-white mb-4">Benefits</h2>
+              <ul className="list-disc pl-5 space-y-2 text-apple-text dark:text-gray-200">
                 {job.benefits.map((item, i) => (
                   <li key={i} className="leading-relaxed">{item}</li>
                 ))}
@@ -216,8 +216,8 @@ const JobDetail: React.FC<JobDetailProps> = ({ job }) => {
       
       <div className="flex flex-col md:flex-row justify-between items-center glass-card p-6 animate-fade-up">
         <div>
-          <h3 className="text-lg font-semibold text-apple-text">Interested in this job?</h3>
-          <p className="text-apple-lighttext">Apply now and we'll help you get in touch with {job.company}</p>
+          <h3 className="text-lg font-semibold text-apple-text dark:text-white">Interested in this job?</h3>
+          <p className="text-apple-lighttext dark:text-gray-300">Apply now and we'll help you get in touch with {job.company}</p>
         </div>
         <button 
           className={`apple-button mt-4 md:mt-0 ${hasApplied ? 'bg-green-500 hover:bg-green-600' : ''}`}

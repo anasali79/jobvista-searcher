@@ -20,7 +20,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
     >
       <div className="glass-card p-6 h-full transition-all duration-300 hover:shadow-md hover:translate-y-[-2px] animate-fade-up" style={{ animationDelay }}>
         <div className="flex items-start gap-4">
-          <div className="flex-shrink-0 h-12 w-12 bg-apple-gray rounded-md overflow-hidden flex items-center justify-center">
+          <div className="flex-shrink-0 h-12 w-12 bg-apple-gray dark:bg-gray-700 rounded-md overflow-hidden flex items-center justify-center">
             {job.companyLogo ? (
               <img 
                 src={job.companyLogo} 
@@ -29,16 +29,16 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
                 loading="lazy"
               />
             ) : (
-              <span className="text-apple-text font-semibold text-lg">
+              <span className="text-apple-text dark:text-white font-semibold text-lg">
                 {job.company.charAt(0)}
               </span>
             )}
           </div>
           <div className="flex-1 min-w-0">
-            <div className="subtitle">{job.company}</div>
-            <h3 className="text-lg font-semibold text-apple-text truncate mb-1">{job.title}</h3>
+            <div className="subtitle dark:text-gray-300">{job.company}</div>
+            <h3 className="text-lg font-semibold text-apple-text dark:text-white truncate mb-1">{job.title}</h3>
             <div className="flex flex-wrap gap-y-2 gap-x-4 mt-3 text-sm">
-              <div className="flex items-center text-apple-lighttext">
+              <div className="flex items-center text-apple-lighttext dark:text-gray-300">
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   className="h-4 w-4 mr-1" 
@@ -55,7 +55,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
                 {job.location}
               </div>
               {job.remote && (
-                <div className="flex items-center text-apple-lighttext">
+                <div className="flex items-center text-apple-lighttext dark:text-gray-300">
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
                     className="h-4 w-4 mr-1" 
@@ -71,7 +71,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
                   Remote
                 </div>
               )}
-              <div className="flex items-center text-apple-lighttext">
+              <div className="flex items-center text-apple-lighttext dark:text-gray-300">
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   className="h-4 w-4 mr-1" 
@@ -99,7 +99,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
           </div>
           {job.featured && (
             <div className="flex-shrink-0">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-apple-blue bg-opacity-10 text-apple-blue">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-apple-blue bg-opacity-10 text-apple-blue dark:bg-apple-blue/20">
                 Featured
               </span>
             </div>
@@ -111,26 +111,26 @@ const JobCard: React.FC<JobCardProps> = ({ job, index }) => {
               {job.tags.slice(0, 3).map((tag, i) => (
                 <span 
                   key={i} 
-                  className="inline-block px-2 py-1 text-xs rounded-md bg-apple-gray text-apple-lighttext"
+                  className="inline-block px-2 py-1 text-xs rounded-md bg-apple-gray dark:bg-gray-700 text-apple-lighttext dark:text-gray-300"
                 >
                   {tag}
                 </span>
               ))}
               {job.tags.length > 3 && (
-                <span className="inline-block px-2 py-1 text-xs rounded-md bg-transparent text-apple-lighttext">
+                <span className="inline-block px-2 py-1 text-xs rounded-md bg-transparent text-apple-lighttext dark:text-gray-300">
                   +{job.tags.length - 3} more
                 </span>
               )}
             </div>
           )}
         </div>
-        <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-100">
-          <div className="text-sm text-apple-lighttext">
+        <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+          <div className="text-sm text-apple-lighttext dark:text-gray-300">
             {job.salary && (
-              <span className="font-medium text-apple-text">{job.salary}</span>
+              <span className="font-medium text-apple-text dark:text-white">{job.salary}</span>
             )}
           </div>
-          <div className="text-sm text-apple-lighttext">
+          <div className="text-sm text-apple-lighttext dark:text-gray-300">
             {job.postedDate}
           </div>
         </div>

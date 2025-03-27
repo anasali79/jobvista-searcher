@@ -58,10 +58,10 @@ const PostJob = () => {
           <span className="inline-block px-3 py-1 text-sm font-medium bg-apple-blue bg-opacity-10 text-apple-blue rounded-full mb-4">
             Post a Job
           </span>
-          <h1 className="text-4xl font-semibold text-apple-text mb-4">
+          <h1 className="text-4xl font-semibold text-apple-text dark:text-white mb-4">
             Reach top talent <span className="text-apple-blue">with JobVista</span>
           </h1>
-          <p className="text-apple-lighttext text-lg max-w-2xl mx-auto">
+          <p className="text-apple-lighttext dark:text-gray-300 text-lg max-w-2xl mx-auto">
             Fill your open positions quickly with our network of qualified job seekers.
           </p>
         </div>
@@ -70,7 +70,7 @@ const PostJob = () => {
           <form onSubmit={handleSubmit}>
             <div className="space-y-6">
               <div>
-                <label htmlFor="title" className="block text-sm font-medium text-apple-text mb-1">
+                <label htmlFor="title" className="block text-sm font-medium text-apple-text dark:text-white mb-1">
                   Job Title <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -80,13 +80,13 @@ const PostJob = () => {
                   value={formData.title}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-apple-blue focus:border-apple-blue"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md focus:ring-apple-blue focus:border-apple-blue"
                   placeholder="e.g. Senior Software Engineer"
                 />
               </div>
               
               <div>
-                <label htmlFor="company" className="block text-sm font-medium text-apple-text mb-1">
+                <label htmlFor="company" className="block text-sm font-medium text-apple-text dark:text-white mb-1">
                   Company Name <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -96,13 +96,13 @@ const PostJob = () => {
                   value={formData.company}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-apple-blue focus:border-apple-blue"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md focus:ring-apple-blue focus:border-apple-blue"
                   placeholder="e.g. Acme Inc."
                 />
               </div>
               
               <div>
-                <label htmlFor="location" className="block text-sm font-medium text-apple-text mb-1">
+                <label htmlFor="location" className="block text-sm font-medium text-apple-text dark:text-white mb-1">
                   Location <span className="text-red-500">*</span>
                 </label>
                 <input
@@ -112,13 +112,13 @@ const PostJob = () => {
                   value={formData.location}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-apple-blue focus:border-apple-blue"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md focus:ring-apple-blue focus:border-apple-blue"
                   placeholder="e.g. San Francisco, CA or Remote"
                 />
               </div>
               
               <div>
-                <label htmlFor="type" className="block text-sm font-medium text-apple-text mb-1">
+                <label htmlFor="type" className="block text-sm font-medium text-apple-text dark:text-white mb-1">
                   Job Type <span className="text-red-500">*</span>
                 </label>
                 <select
@@ -127,7 +127,7 @@ const PostJob = () => {
                   value={formData.type}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-apple-blue focus:border-apple-blue"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md focus:ring-apple-blue focus:border-apple-blue"
                 >
                   <option value="Full-time">Full-time</option>
                   <option value="Part-time">Part-time</option>
@@ -138,7 +138,7 @@ const PostJob = () => {
               </div>
               
               <div>
-                <label htmlFor="description" className="block text-sm font-medium text-apple-text mb-1">
+                <label htmlFor="description" className="block text-sm font-medium text-apple-text dark:text-white mb-1">
                   Job Description <span className="text-red-500">*</span>
                 </label>
                 <textarea
@@ -148,13 +148,13 @@ const PostJob = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-apple-blue focus:border-apple-blue"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md focus:ring-apple-blue focus:border-apple-blue"
                   placeholder="Describe the role, responsibilities, and what a typical day looks like"
                 />
               </div>
               
               <div>
-                <label htmlFor="requirements" className="block text-sm font-medium text-apple-text mb-1">
+                <label htmlFor="requirements" className="block text-sm font-medium text-apple-text dark:text-white mb-1">
                   Requirements <span className="text-red-500">*</span>
                 </label>
                 <textarea
@@ -164,7 +164,7 @@ const PostJob = () => {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-apple-blue focus:border-apple-blue"
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-white rounded-md focus:ring-apple-blue focus:border-apple-blue"
                   placeholder="List the skills, experience, and qualifications required"
                 />
               </div>

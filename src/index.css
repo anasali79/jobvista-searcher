@@ -112,6 +112,13 @@
   .subtitle {
     @apply text-sm text-apple-lighttext dark:text-gray-400 mb-2;
   }
+
+  .prose-apple {
+    @apply prose-headings:text-apple-text prose-headings:dark:text-white 
+      prose-p:text-apple-text prose-p:dark:text-gray-200 
+      prose-strong:text-apple-text prose-strong:dark:text-white
+      prose-li:text-apple-text prose-li:dark:text-gray-200;
+  }
 }
 
 /* Custom page transitions */
