@@ -12,6 +12,7 @@ import Employers from "./pages/Employers";
 import Resources from "./pages/Resources";
 import PostJob from "./pages/PostJob";
 import RocketAnimation from "./components/RocketAnimation";
+import { ThemeProvider } from "./components/ThemeProvider";
 
 // New page imports
 import JobAlerts from "./pages/JobAlerts";
@@ -40,34 +41,36 @@ const App = () => {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        {showAnimation && <RocketAnimation />}
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/job/:id" element={<JobDetail />} />
-            <Route path="/employers" element={<Employers />} />
-            <Route path="/resources" element={<Resources />} />
-            <Route path="/post-job" element={<PostJob />} />
-            
-            {/* New routes */}
-            <Route path="/job-alerts" element={<JobAlerts />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/about" element={<AboutUs />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/help" element={<HelpCenter />} />
-            
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ThemeProvider defaultTheme="light">
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          {showAnimation && <RocketAnimation />}
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/job/:id" element={<JobDetail />} />
+              <Route path="/employers" element={<Employers />} />
+              <Route path="/resources" element={<Resources />} />
+              <Route path="/post-job" element={<PostJob />} />
+              
+              {/* New routes */}
+              <Route path="/job-alerts" element={<JobAlerts />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/about" element={<AboutUs />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/help" element={<HelpCenter />} />
+              
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 };
 

@@ -98,7 +98,7 @@
   }
   
   .glass-card {
-    @apply bg-white/90 backdrop-blur-md shadow-sm border border-white/40 rounded-xl;
+    @apply bg-white/90 dark:bg-gray-800/90 backdrop-blur-md shadow-sm border border-white/40 dark:border-gray-700/40 rounded-xl;
   }
   
   .page-container {
@@ -106,11 +106,11 @@
   }
   
   .search-field {
-    @apply w-full px-5 py-3 text-base rounded-full bg-apple-gray border-none focus:outline-none focus:ring-2 focus:ring-apple-blue transition-all duration-300;
+    @apply w-full px-5 py-3 text-base rounded-full bg-apple-gray dark:bg-gray-700 dark:text-white border-none focus:outline-none focus:ring-2 focus:ring-apple-blue transition-all duration-300;
   }
   
   .subtitle {
-    @apply text-sm text-apple-lighttext mb-2;
+    @apply text-sm text-apple-lighttext dark:text-gray-400 mb-2;
   }
 }
 
@@ -174,4 +174,3 @@
 .animate-rocket {
   animation: rocket-fly 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
 }
-
