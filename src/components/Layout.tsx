@@ -49,6 +49,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <Link to="/resources" className="text-apple-text hover:text-apple-blue transition-colors duration-300">
                   Resources
                 </Link>
+                <Link to="/profile" className="text-apple-text hover:text-apple-blue transition-colors duration-300">
+                  My Profile
+                </Link>
               </div>
             </nav>
             <div className="flex items-center space-x-4">
@@ -104,6 +107,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Resources
+              </Link>
+              <Link 
+                to="/profile" 
+                className="block py-2 px-3 text-apple-text hover:bg-apple-gray rounded-md"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                My Profile
               </Link>
               <Link 
                 to="/post-job" 

@@ -1,8 +1,19 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Document from "./_document";
 import { useApplicationStore, ApplicationStatus } from "../utils/applicationStore";
 import { Link } from "react-router-dom";
+import { useToast } from "@/components/ui/use-toast";
+
+// User profile interface
+interface UserProfile {
+  name: string;
+  title: string;
+  email: string;
+  phone: string;
+  location: string;
+  about: string;
+}
 
 // Custom status badge component
 const StatusBadge = ({ status }: { status: ApplicationStatus }) => {
@@ -76,6 +87,46 @@ const ApplicationTimeline = ({ status }: { status: ApplicationStatus }) => {
 
 const Profile = () => {
   const { applications, updateApplicationStatus } = useApplicationStore();
+  const { toast } = useToast();
+  
+  // Default user profile data (in a real app, this would come from a database)
+  const [isEditing, setIsEditing] = useState(false);
+  const [profile, setProfile] = useState<UserProfile>({
+    name: "John Doe",
+    title: "Software Developer",
+    email: "john.doe@example.com",
+    phone: "+1 (555) 123-4567",
+    location: "San Francisco, CA",
+    about: "Experienced software developer with a passion for creating elegant, efficient solutions to complex problems. I specialize in full-stack development with modern technologies."
+  });
+  
+  // Temporary state for editing
+  const [editedProfile, setEditedProfile] = useState<UserProfile>(profile);
+  
+  // Function to handle profile edit
+  const handleEditProfile = () => {
+    setEditedProfile({...profile});
+    setIsEditing(true);
+  };
+  
+  // Function to handle profile update
+  const handleUpdateProfile = () => {
+    setProfile(editedProfile);
+    setIsEditing(false);
+    toast({
+      title: "Profile Updated",
+      description: "Your profile has been successfully updated.",
+    });
+  };
+  
+  // Function to handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setEditedProfile(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
   
   // Function to simulate changing application status (for demo purposes)
   const handleAdvanceStatus = (jobId: string, currentStatus: ApplicationStatus) => {
@@ -105,27 +156,136 @@ const Profile = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-1">
             <div className="glass-card p-6">
-              <div className="flex flex-col items-center">
-                <div className="w-24 h-24 bg-apple-gray rounded-full flex items-center justify-center mb-4">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-apple-lighttext" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                    <circle cx="12" cy="7" r="4"></circle>
-                  </svg>
+              {!isEditing ? (
+                <div className="flex flex-col items-center">
+                  <div className="w-24 h-24 bg-apple-gray rounded-full flex items-center justify-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-apple-lighttext" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </div>
+                  <h2 className="text-xl font-semibold text-apple-text">{profile.name}</h2>
+                  <p className="text-apple-lighttext">{profile.title}</p>
+                  <button 
+                    onClick={handleEditProfile}
+                    className="mt-4 text-sm text-apple-blue hover:underline"
+                  >
+                    Edit Profile
+                  </button>
+
+                  <div className="mt-6 w-full border-t border-gray-200 pt-4">
+                    <div className="space-y-3">
+                      <div>
+                        <h3 className="text-sm font-medium text-apple-text">Email</h3>
+                        <p className="text-sm text-apple-lighttext">{profile.email}</p>
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-medium text-apple-text">Phone</h3>
+                        <p className="text-sm text-apple-lighttext">{profile.phone}</p>
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-medium text-apple-text">Location</h3>
+                        <p className="text-sm text-apple-lighttext">{profile.location}</p>
+                      </div>
+                      <div>
+                        <h3 className="text-sm font-medium text-apple-text">About</h3>
+                        <p className="text-sm text-apple-lighttext">{profile.about}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <h2 className="text-xl font-semibold text-apple-text">John Doe</h2>
-                <p className="text-apple-lighttext">Software Developer</p>
-                <button className="mt-4 text-sm text-apple-blue hover:underline">Edit Profile</button>
-              </div>
+              ) : (
+                <div className="w-full">
+                  <h2 className="text-xl font-semibold text-apple-text mb-4 text-center">Edit Profile</h2>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-apple-text mb-1">Full Name</label>
+                      <input
+                        type="text"
+                        name="name"
+                        value={editedProfile.name}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-apple-blue"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-apple-text mb-1">Title</label>
+                      <input
+                        type="text"
+                        name="title"
+                        value={editedProfile.title}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-apple-blue"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-apple-text mb-1">Email</label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={editedProfile.email}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-apple-blue"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-apple-text mb-1">Phone</label>
+                      <input
+                        type="tel"
+                        name="phone"
+                        value={editedProfile.phone}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-apple-blue"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-apple-text mb-1">Location</label>
+                      <input
+                        type="text"
+                        name="location"
+                        value={editedProfile.location}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-apple-blue"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-apple-text mb-1">About</label>
+                      <textarea
+                        name="about"
+                        value={editedProfile.about}
+                        onChange={handleInputChange}
+                        rows={4}
+                        className="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-apple-blue"
+                      />
+                    </div>
+                    <div className="flex justify-end space-x-2 pt-2">
+                      <button
+                        onClick={() => setIsEditing(false)}
+                        className="px-4 py-2 text-sm text-apple-text bg-gray-100 rounded-md hover:bg-gray-200"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={handleUpdateProfile}
+                        className="px-4 py-2 text-sm text-white bg-apple-blue rounded-md hover:bg-blue-600"
+                      >
+                        Save Changes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
               
-              <div className="mt-6 border-t border-gray-200 pt-4">
-                <h3 className="text-md font-semibold text-apple-text mb-2">Account</h3>
-                <ul className="space-y-2">
-                  <li><button className="text-apple-lighttext hover:text-apple-blue w-full text-left">Profile Settings</button></li>
-                  <li><button className="text-apple-lighttext hover:text-apple-blue w-full text-left">Resume Manager</button></li>
-                  <li><button className="text-apple-lighttext hover:text-apple-blue w-full text-left">Job Preferences</button></li>
-                  <li><button className="text-apple-lighttext hover:text-apple-blue w-full text-left">Privacy Settings</button></li>
-                </ul>
-              </div>
+              {!isEditing && (
+                <div className="mt-6 border-t border-gray-200 pt-4">
+                  <h3 className="text-md font-semibold text-apple-text mb-2">Account</h3>
+                  <ul className="space-y-2">
+                    <li><button className="text-apple-lighttext hover:text-apple-blue w-full text-left">Resume Manager</button></li>
+                    <li><button className="text-apple-lighttext hover:text-apple-blue w-full text-left">Job Preferences</button></li>
+                    <li><button className="text-apple-lighttext hover:text-apple-blue w-full text-left">Privacy Settings</button></li>
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
           
