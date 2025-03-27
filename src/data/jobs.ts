@@ -23,10 +23,10 @@ export const jobs: Job[] = [
     id: "1",
     title: "Senior Frontend Developer",
     company: "TechVision Inc.",
-    location: "San Francisco, CA",
+    location: "India , Indore, MP",
     type: "Full-time",
     remote: true,
-    salary: "$120,000 - $150,000",
+    salary: "6LPA - 10LPA ",
     description: `We are looking for a Senior Frontend Developer to join our team. You will be responsible for building and maintaining user interfaces for our web applications.
 
 The ideal candidate has a deep understanding of React, TypeScript, and modern frontend development practices. You should be able to write clean, maintainable code and have an eye for detail.
@@ -63,9 +63,9 @@ As part of our team, you'll collaborate with designers, backend developers, and 
     id: "2",
     title: "Product Designer",
     company: "DesignHub",
-    location: "New York, NY",
+    location: "Delhi, India",
     type: "Full-time",
-    salary: "$90,000 - $120,000",
+    salary: "7LPA - 12LPA",
     description: `DesignHub is seeking a talented Product Designer to join our growing team. In this role, you will work on creating intuitive and visually appealing user interfaces for our digital products.
 
 You'll collaborate with product managers, engineers, and other designers to define and implement innovative solutions for product direction, visuals, and experience.`,
